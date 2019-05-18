@@ -13,7 +13,7 @@ Original Swif4 template can be found [here](https://github.com/swagger-api/swagg
 
 Swagger schema:
 
-```
+```yaml
 HimotokiExampleModel:
     type: object
     properties:
@@ -33,7 +33,7 @@ HimotokiExampleModel:
 ```
 
 Swift Model
-```
+```swift
 import Foundation
 import Himotoki
 
