@@ -1,0 +1,1 @@
+# swagger-codegen-template-himotoki
