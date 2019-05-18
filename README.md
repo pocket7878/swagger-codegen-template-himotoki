@@ -1,6 +1,6 @@
 # swagger-codegen-template-himotoki
 
-Swagger Codegen template for Swift4 + Himotoki.
+Swagger Codegen template for Swift4 + Himotoki. (under development, not ready for production)
 
 ## Difference between original
 
