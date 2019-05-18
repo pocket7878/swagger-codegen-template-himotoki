@@ -1,0 +1,6 @@
+import Himotoki
+
+public enum {{classname}}: {{dataType}}, Himotoki.Decodable {
+{{#allowableValues}}{{#enumVars}}    case {{name}} = "{{{value}}}"
+{{/enumVars}}{{/allowableValues}}
+}

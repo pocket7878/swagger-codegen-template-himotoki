@@ -1,0 +1,48 @@
+import Himotoki
+
+struct {{classname}}: Himotoki.Decodable {
+
+{{#allVars}}
+{{#isEnum}}
+{{> modelInlineEnumDeclaration}}
+{{/isEnum}}
+{{/allVars}}
+{{#allVars}}
+{{#isEnum}}
+    {{#description}}/** {{description}} */
+    {{/description}}
+    let {{name}}: {{{datatypeWithEnum}}}{{^required}}?{{/required}}{{#defaultValue}} = {{{defaultValue}}}{{/defaultValue}}
+{{/isEnum}}
+{{^isEnum}}
+    {{#description}}/** {{description}} */
+    {{/description}}
+    let {{name}}: {{#vendorExtensions.x-himotoki-transform-type}}{{vendorExtensions.x-himotoki-transform-type}}{{/vendorExtensions.x-himotoki-transform-type}}{{^vendorExtensions.x-himotoki-transform-type}}{{{datatype}}}{{/vendorExtensions.x-himotoki-transform-type}}{{^required}}?{{/required}}{{#defaultValue}} = {{{defaultValue}}}{{/defaultValue}}{{#objcCompatible}}{{#vendorExtensions.x-swift-optional-scalar}}
+    public var {{name}}Num: NSNumber? {
+        get {
+            return {{name}}.map({ return NSNumber(value: $0) })
+        }
+    }{{/vendorExtensions.x-swift-optional-scalar}}{{/objcCompatible}}
+{{/isEnum}}
+{{/allVars}}
+
+{{#hasVars}}
+    public init({{#allVars}}{{name}}: {{#vendorExtensions.x-himotoki-transform-type}}{{vendorExtensions.x-himotoki-transform-type}}{{/vendorExtensions.x-himotoki-transform-type}}{{^vendorExtensions.x-himotoki-transform-type}}{{{datatypeWithEnum}}}{{/vendorExtensions.x-himotoki-transform-type}}{{^required}}?{{/required}}{{#hasMore}}, {{/hasMore}}{{/allVars}}) {
+        {{#allVars}}
+        self.{{name}} = {{name}}
+        {{/allVars}}
+    }
+{{/hasVars}}
+
+    static func decode(_ e: Extractor) throws -> {{name}} {
+        {{#hasVars}}
+        return try {{name}}(
+            {{#allVars}}
+            {{name}}: {{#vendorExtensions.x-himotoki-transform-type}}{{vendorExtensions.x-himotoki-transform-type}}Transformer.apply({{/vendorExtensions.x-himotoki-transform-type}}e <|{{^required}}?{{/required}} "{{{baseName}}}"{{#vendorExtensions.x-himotoki-transform-type}}){{/vendorExtensions.x-himotoki-transform-type}}{{#hasMore}}, {{/hasMore}}
+        {{/allVars}}
+        )
+        {{/hasVars}}
+        {{^hasVars}}
+        return {{name}}()
+        {{/hasVars}}
+    }
+}
