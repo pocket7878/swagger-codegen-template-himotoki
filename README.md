@@ -9,6 +9,11 @@ Original Swif4 template can be found [here](https://github.com/swagger-api/swagg
 - Use [ikesyo/Himotoki](https://github.com/ikesyo/Himotoki) instead of Codable.
 - Add extension `x-himotoki-transform-type` to specify Himotoki transformer.
 
+**MODEL TEMPLATE ONLY**
+```
+-Dmodels
+```
+
 ## Example
 
 Swagger schema:
